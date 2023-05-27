@@ -1,6 +1,17 @@
 [
   {
-    "id": "08187c92-179f-498d-8694-6a06192ccb49",
+    "id": "1679b1ea-955f-4520-ad73-838394acab45",
+    "title": "Producto Postman",
+    "description": "Este es un producto de Postman",
+    "code": "a1",
+    "price": 100,
+    "status": true,
+    "stock": 10,
+    "category": "Categoría Postman",
+    "thumbnails": []
+  },
+  {
+    "id": "d50b3144-403e-498b-8769-9691e5854881",
     "title": "Producto Postman",
     "description": "Este es un producto de Postman",
     "code": "a1",
@@ -9,5 +20,27 @@
     "stock": 10,
     "category": "Categoría Postman",
     "thumbnails": "Sin imagen"
+  },
+  {
+    "id": "f7682fce-e75a-4435-956b-3977521e9b35",
+    "title": "Producto Postman",
+    "description": "Este es un producto de Postman",
+    "code": "a1",
+    "price": 100,
+    "status": true,
+    "stock": 10,
+    "category": "Categoría Postman",
+    "thumbnails": "Con imagen"
+  },
+  {
+    "id": "d517",
+    "title": "Producto Postmanzzz",
+    "description": "Este es un producto de Postman",
+    "code": "a1",
+    "price": 100,
+    "status": true,
+    "stock": 10,
+    "category": "Categoría Postman",
+    "thumbnails": "Con imagen"
   }
 ]

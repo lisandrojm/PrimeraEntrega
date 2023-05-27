@@ -12,6 +12,8 @@ if (!fs.existsSync(productosFilePath) || fs.readFileSync(productosFilePath, 'utf
   fs.writeFileSync(productosFilePath, '[]');
 }
 
+/////////////////////////////////////////////////////
+/* La ruta raíz GET /  */
 // Obtener todos los productos
 router.get('/', (req, res) => {
   try {
@@ -24,6 +26,8 @@ router.get('/', (req, res) => {
   }
 });
 
+/////////////////////////////////////////////////////
+/* La ruta raíz POST /  */
 // Agregar un nuevo producto
 router.post('/', (req, res) => {
   try {
@@ -34,7 +38,7 @@ router.post('/', (req, res) => {
     const products = JSON.parse(productosData);
 
     // Generar un ID único para el nuevo producto
-    const newProductId = uuidv4();
+    const newProductId = uuidv4().substring(0, 4);
 
     // Crear el nuevo producto con los campos proporcionados
     const newProduct = {
@@ -43,10 +47,10 @@ router.post('/', (req, res) => {
       description,
       code,
       price,
-      status: true, // Por defecto, el estado es true
+      status: true,
       stock,
       category,
-      thumbnails: thumbnails || [], // Si no se proporciona thumbnails, se asigna un array vacío
+      thumbnails: thumbnails || 'Sin imagen', // Asignar el string "Sin imagen" si no se proporciona thumbnails
     };
 
     // Agregar el nuevo producto al array de productos
