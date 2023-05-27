@@ -27,6 +27,30 @@ router.get('/', (req, res) => {
 });
 
 /////////////////////////////////////////////////////
+/* La ruta GET /:pid /  */
+
+// Obtener producto con el id proporcionado
+router.get('/:pid', (req, res) => {
+  try {
+    const { pid } = req.params;
+
+    // Leer el archivo JSON de productos
+    const productosData = fs.readFileSync(productosFilePath, 'utf8');
+    const products = JSON.parse(productosData);
+
+    // Buscar el producto por su ID
+    const product = products.find((p) => p.id === pid);
+
+    if (!product) {
+      return res.status(404).json({ error: 'Producto no encontrado' });
+    }
+
+    return res.status(200).json(product);
+  } catch (error) {
+    return res.status(500).json({ error: 'Error al obtener el producto' });
+  }
+});
+/////////////////////////////////////////////////////
 /* La ruta raíz POST /  */
 // Agregar un nuevo producto
 router.post('/', (req, res) => {
