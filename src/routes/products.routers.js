@@ -99,16 +99,11 @@ router.post('/', (req, res) => {
 });
 /////////////////////////////////////////////////////
 /* La ruta raíz PUT /  */
-// Modificar un producto desde el id / no deja enviar el id del producto.
+// Modificar un producto desde el id especificado/ no deja enviar el id del producto.
 router.put('/:pid', (req, res) => {
   try {
     const { pid } = req.params;
     const updateFields = req.body;
-
-    // Verificar si se intenta modificar el ID del producto
-    if ('id' in updateFields) {
-      return res.status(400).send({ status: 'error', error: 'No se puede modificar el ID del producto' });
-    }
 
     // Leer el archivo JSON de productos
     const productosData = fs.readFileSync(productosFilePath, 'utf8');
@@ -125,7 +120,14 @@ router.put('/:pid', (req, res) => {
     // Obtener el producto actual
     const product = products[productIndex];
 
-    // Actualizar los campos proporcionados sin eliminar los campos no proporcionados
+    // Verificar si los campos enviados son válidos
+    const validFields = Object.keys(updateFields).every((field) => field in product);
+
+    if (!validFields) {
+      return res.status(400).send({ status: 'error', error: 'Los campos enviados no son válidos' });
+    }
+
+    // Actualizar el producto con los campos enviados
     const updatedProduct = {
       ...product,
       ...updateFields,
@@ -140,6 +142,36 @@ router.put('/:pid', (req, res) => {
     return res.status(200).send({ status: 'success', message: 'Producto actualizado correctamente' });
   } catch (error) {
     return res.status(500).send({ status: 'error', error: 'Error al actualizar el producto' });
+  }
+});
+/////////////////////////////////////////////////////
+/* La ruta raíz DELETE /  */
+// ELimina un producto desde el id especificado.
+router.delete('/:pid', (req, res) => {
+  try {
+    const { pid } = req.params;
+
+    // Leer el archivo JSON de productos
+    const productosData = fs.readFileSync(productosFilePath, 'utf8');
+    const products = JSON.parse(productosData);
+
+    // Encontrar el índice del producto a eliminar
+    const productIndex = products.findIndex((p) => p.id === pid);
+
+    // Verificar si el producto no existe
+    if (productIndex === -1) {
+      return res.status(404).send({ status: 'error', error: 'Producto no encontrado' });
+    }
+
+    // Eliminar el producto de la lista de productos
+    products.splice(productIndex, 1);
+
+    // Guardar los productos actualizados en el archivo JSON
+    fs.writeFileSync(productosFilePath, JSON.stringify(products, null, 2));
+
+    return res.status(200).send({ status: 'success', message: 'Producto eliminado correctamente' });
+  } catch (error) {
+    return res.status(500).send({ status: 'error', error: 'Error al eliminar el producto' });
   }
 });
 

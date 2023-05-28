@@ -11,7 +11,7 @@
     "thumbnails": "Sin imagen"
   },
   {
-    "id": "d9a2",
+    "id": "6d4c",
     "title": "Titulo modificado",
     "description": "Este es un producto de Postman",
     "code": "a1",
@@ -19,10 +19,11 @@
     "status": true,
     "stock": 10,
     "category": "Categoría Postman",
-    "thumbnails": "Sin imagen"
+    "thumbnails": "Sin imagen",
+    "titulo": "Titulo modificado"
   },
   {
-    "id": "6d4c",
+    "id": "6088",
     "title": "Producto Postman",
     "description": "Este es un producto de Postman",
     "code": "a1",
@@ -30,6 +31,10 @@
     "status": true,
     "stock": 10,
     "category": "Categoría Postman",
-    "thumbnails": "Sin imagen"
+    "thumbnails": [
+      "/ruta/de/image1.jpg",
+      "/ruta/de/image2.jpg",
+      "/ruta/de/image3.jpg"
+    ]
   }
 ]
