@@ -1,6 +1,6 @@
 [
   {
-    "id": "19f6",
+    "id": "e076",
     "title": "Producto Postman",
     "description": "Este es un producto de Postman",
     "code": "a1",
@@ -8,6 +8,21 @@
     "status": true,
     "stock": 10,
     "category": "Categoría Postman",
-    "thumbnails": "Con imagen"
+    "thumbnails": [
+      "/ruta/de/imagen1.jpg"
+    ]
+  },
+  {
+    "id": "13f3",
+    "title": "Producto Postman",
+    "description": "Este es un producto de Postman",
+    "code": "a1",
+    "price": 100,
+    "status": true,
+    "stock": 10,
+    "category": "Categoría Postman",
+    "thumbnails": [
+      "Sin imagen"
+    ]
   }
 ]

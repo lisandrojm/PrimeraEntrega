@@ -84,7 +84,7 @@ router.post('/', (req, res) => {
       status: true,
       stock,
       category,
-      thumbnails: thumbnails || 'Sin imagen', // Asignar el string "Sin imagen" si no se proporciona thumbnails
+      thumbnails: thumbnails || ['Sin imagen'], // Asignar el string "Sin imagen" si no se proporciona thumbnails
     };
 
     // Agregar el nuevo producto al array de productos
