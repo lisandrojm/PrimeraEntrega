@@ -20,5 +20,20 @@
     "stock": 20,
     "category": "Categoría Postman modificado",
     "thumbnails": "Sin imagen"
+  },
+  {
+    "id": "7394",
+    "title": "Producto Postman",
+    "description": "Este es un producto de Postman",
+    "code": "a12",
+    "price": 100,
+    "status": true,
+    "stock": 10,
+    "category": "Categoría Postman",
+    "thumbnails": [
+      "/ruta/de/image1.jpg",
+      "/ruta/de/image2.jpg",
+      "/ruta/de/image3.jpg"
+    ]
   }
 ]

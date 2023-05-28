@@ -82,6 +82,13 @@ router.post('/', async (req, res) => {
     const productosData = await fs.readFile(productosFilePath, 'utf8');
     const products = JSON.parse(productosData);
 
+    // Verificar si ya existe un producto con el mismo código
+    const existingProduct = products.find((p) => p.code === code);
+
+    if (existingProduct) {
+      return res.status(400).send({ status: 'error', error: 'Ya existe un producto con el mismo código' });
+    }
+
     // Generar un ID único para el nuevo producto
     const newProductId = uuidv4().substring(0, 4);
 
@@ -225,7 +232,7 @@ module.exports = router;
   "stock": 10,
   "category": "Categoría Postman"
 } */
-// Retorna : created : Producto agregado correctamente y "thumbnails":['Sin imagenes']
+// Retorna : created : "Producto agregado correctamente y "thumbnails":['Sin imagenes']"
 
 // Con campo  "thumbnails"
 /* {
@@ -255,7 +262,7 @@ module.exports = router;
     "/ruta/de/image3.jpg"
   ]
 } */
-// Retorna : error: Faltan campos obligatorios
+// Retorna : error: "Faltan campos obligatorios"
 
 /////////////////////////////////////////////////////
 /* La ruta raíz PUT /  */
@@ -266,4 +273,23 @@ module.exports = router;
   "title": "Titulo modificado"
 }  */
 
-// Retorna : success: Faltan campos obligatorios
+// Retorna : success: "Faltan campos obligatorios"
+
+/////////////////////////////////////////////////////
+/* La ruta raíz PUT /  */
+// Error al intentar agregar producto con el mismo código
+/* http://localhost:8080/api/products/:pid */
+// Templates de productos para el Body de Postman
+/* {
+  "title": "Producto Postman",
+  "description": "Este es un producto de Postman",
+  "code": "a1",
+  "stock": 10,
+  "category": "Categoría Postman",
+  "thumbnails": [
+    "/ruta/de/image1.jpg",
+    "/ruta/de/image2.jpg",
+    "/ruta/de/image3.jpg"
+  ]
+} */
+// Retorna : error: "Ya existe un producto con el mismo código"
