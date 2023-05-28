@@ -1,6 +1,6 @@
 [
   {
-    "id": "e076",
+    "id": "b4de",
     "title": "Producto Postman",
     "description": "Este es un producto de Postman",
     "code": "a1",
@@ -9,11 +9,11 @@
     "stock": 10,
     "category": "Categoría Postman",
     "thumbnails": [
-      "/ruta/de/imagen1.jpg"
+      "Sin imagenes"
     ]
   },
   {
-    "id": "13f3",
+    "id": "0e7e",
     "title": "Producto Postman",
     "description": "Este es un producto de Postman",
     "code": "a1",
@@ -22,7 +22,9 @@
     "stock": 10,
     "category": "Categoría Postman",
     "thumbnails": [
-      "Sin imagen"
+      "/ruta/de/image1.jpg",
+      "/ruta/de/image2.jpg",
+      "/ruta/de/image3.jpg"
     ]
   }
 ]

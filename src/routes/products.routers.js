@@ -84,7 +84,7 @@ router.post('/', (req, res) => {
       status: true,
       stock,
       category,
-      thumbnails: thumbnails || ['Sin imagen'], // Asignar el string "Sin imagen" si no se proporciona thumbnails
+      thumbnails: thumbnails || ['Sin imagenes'], // Asignar el string "Sin imagen" si no se proporciona thumbnails
     };
 
     // Agregar el nuevo producto al array de productos
@@ -134,17 +134,36 @@ module.exports = router;
   "code": "a1",
   "price": 100,
   "stock": 10,
-  "category": "Categoría Postman",
+  "category": "Categoría Postman"
 } */
-// Retorna : created : Producto agregado correctamente
+// Retorna : created : Producto agregado correctamente y "thumbnails":['Sin imagenes']
 
-// Sin otro campo que no sea "thumbnails", en este caso sin el campo "precio"
+// Con campo  "thumbnails"
+/* {
+  "title": "Producto Postman",
+  "description": "Este es un producto de Postman",
+  "code": "a1",
+  "price": 100,
+  "stock": 10,
+  "category": "Categoría Postman",
+  "thumbnails": [
+    "/ruta/de/image1.jpg",
+    "/ruta/de/image2.jpg",
+    "/ruta/de/image3.jpg"
+  ]
+} */
+
+// Con campo  "thumbnails", pero sin el campo "price"
 /* {
   "title": "Producto Postman",
   "description": "Este es un producto de Postman",
   "code": "a1",
   "stock": 10,
   "category": "Categoría Postman",
-  "thumbnails": "Con imagen"
+  "thumbnails": [
+    "/ruta/de/image1.jpg",
+    "/ruta/de/image2.jpg",
+    "/ruta/de/image3.jpg"
+  ]
 } */
 // Retorna : error: Faltan campos obligatorios
