@@ -1,6 +1,6 @@
 [
   {
-    "id": "497d",
+    "id": "d806",
     "title": "Producto Postman",
     "description": "Este es un producto de Postman",
     "code": "a1",
@@ -11,30 +11,14 @@
     "thumbnails": "Sin imagen"
   },
   {
-    "id": "6d4c",
-    "title": "Titulo modificado",
-    "description": "Este es un producto de Postman",
-    "code": "a1",
-    "price": 100,
+    "id": "d0de",
+    "title": "Producto Postman modificado",
+    "description": "Este es un producto de Postman modificado",
+    "code": "a2",
+    "price": 200,
     "status": true,
-    "stock": 10,
-    "category": "Categoría Postman",
-    "thumbnails": "Sin imagen",
-    "titulo": "Titulo modificado"
-  },
-  {
-    "id": "6088",
-    "title": "Producto Postman",
-    "description": "Este es un producto de Postman",
-    "code": "a1",
-    "price": 100,
-    "status": true,
-    "stock": 10,
-    "category": "Categoría Postman",
-    "thumbnails": [
-      "/ruta/de/image1.jpg",
-      "/ruta/de/image2.jpg",
-      "/ruta/de/image3.jpg"
-    ]
+    "stock": 20,
+    "category": "Categoría Postman modificado",
+    "thumbnails": "Sin imagen"
   }
 ]

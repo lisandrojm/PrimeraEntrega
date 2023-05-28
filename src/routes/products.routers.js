@@ -1,5 +1,5 @@
 const express = require('express');
-const fs = require('fs');
+const fs = require('fs').promises;
 const { v4: uuidv4 } = require('uuid');
 
 const router = express.Router();
@@ -8,19 +8,30 @@ const router = express.Router();
 const productosFilePath = './productos.json';
 
 // Verificar y crear el archivo "productos.json" si no existe o está vacío
-if (!fs.existsSync(productosFilePath) || fs.readFileSync(productosFilePath, 'utf8').trim() === '') {
-  fs.writeFileSync(productosFilePath, '[]');
-}
+(async () => {
+  try {
+    await fs.access(productosFilePath); // Check if the file exists
+
+    const productosData = await fs.readFile(productosFilePath, 'utf8');
+    if (productosData.trim() === '') {
+      // Empty file, initialize with empty array
+      await fs.writeFile(productosFilePath, '[]');
+    }
+  } catch (error) {
+    // File does not exist, create with empty array
+    await fs.writeFile(productosFilePath, '[]');
+  }
+})();
 
 /////////////////////////////////////////////////////
 /* La ruta raíz GET /  */
 // Obtener todos los productos (Incluyendo la limitación ?limit)
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const limit = req.query.limit; // Obtener el valor del parámetro 'limit' de la consulta (si existe)
 
     // Leer el archivo JSON de productos
-    const productosData = fs.readFileSync(productosFilePath, 'utf8');
+    const productosData = await fs.readFile(productosFilePath, 'utf8');
     const products = JSON.parse(productosData);
 
     // Obtener productos limitados según el parámetro 'limit' o todos los productos si no se especifica el parámetro
@@ -35,12 +46,12 @@ router.get('/', (req, res) => {
 /////////////////////////////////////////////////////
 /* La ruta GET /:pid /  */
 // Obtener producto con el id proporcionado
-router.get('/:pid', (req, res) => {
+router.get('/:pid', async (req, res) => {
   try {
     const { pid } = req.params;
 
     // Leer el archivo JSON de productos
-    const productosData = fs.readFileSync(productosFilePath, 'utf8');
+    const productosData = await fs.readFile(productosFilePath, 'utf8');
     const products = JSON.parse(productosData);
 
     // Buscar el producto por su ID
@@ -58,7 +69,7 @@ router.get('/:pid', (req, res) => {
 /////////////////////////////////////////////////////
 /* La ruta raíz POST /  */
 // Agregar un nuevo producto
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { title, description, code, price, stock, category, thumbnails } = req.body;
 
@@ -68,7 +79,7 @@ router.post('/', (req, res) => {
     }
 
     // Leer el archivo JSON de productos
-    const productosData = fs.readFileSync(productosFilePath, 'utf8');
+    const productosData = await fs.readFile(productosFilePath, 'utf8');
     const products = JSON.parse(productosData);
 
     // Generar un ID único para el nuevo producto
@@ -91,7 +102,8 @@ router.post('/', (req, res) => {
     products.push(newProduct);
 
     // Guardar los productos actualizados en el archivo JSON
-    fs.writeFileSync(productosFilePath, JSON.stringify(products, null, 2));
+    await fs.writeFile(productosFilePath, JSON.stringify(products, null, 2));
+
     return res.status(201).send({ status: 'created', message: 'Producto agregado correctamente' });
   } catch (error) {
     return res.status(500).send({ status: 'error', error: 'Error al agregar el producto' });
@@ -100,13 +112,13 @@ router.post('/', (req, res) => {
 /////////////////////////////////////////////////////
 /* La ruta raíz PUT /  */
 // Modificar un producto desde el id especificado/ no deja enviar el id del producto.
-router.put('/:pid', (req, res) => {
+router.put('/:pid', async (req, res) => {
   try {
     const { pid } = req.params;
     const updateFields = req.body;
 
     // Leer el archivo JSON de productos
-    const productosData = fs.readFileSync(productosFilePath, 'utf8');
+    const productosData = await fs.readFile(productosFilePath, 'utf8');
     const products = JSON.parse(productosData);
 
     // Encontrar el índice del producto a actualizar
@@ -137,7 +149,7 @@ router.put('/:pid', (req, res) => {
     products[productIndex] = updatedProduct;
 
     // Guardar los productos actualizados en el archivo JSON
-    fs.writeFileSync(productosFilePath, JSON.stringify(products, null, 2));
+    await fs.writeFile(productosFilePath, JSON.stringify(products, null, 2));
 
     return res.status(200).send({ status: 'success', message: 'Producto actualizado correctamente' });
   } catch (error) {
@@ -147,12 +159,12 @@ router.put('/:pid', (req, res) => {
 /////////////////////////////////////////////////////
 /* La ruta raíz DELETE /  */
 // ELimina un producto desde el id especificado.
-router.delete('/:pid', (req, res) => {
+router.delete('/:pid', async (req, res) => {
   try {
     const { pid } = req.params;
 
     // Leer el archivo JSON de productos
-    const productosData = fs.readFileSync(productosFilePath, 'utf8');
+    const productosData = await fs.readFile(productosFilePath, 'utf8');
     const products = JSON.parse(productosData);
 
     // Encontrar el índice del producto a eliminar
@@ -167,7 +179,7 @@ router.delete('/:pid', (req, res) => {
     products.splice(productIndex, 1);
 
     // Guardar los productos actualizados en el archivo JSON
-    fs.writeFileSync(productosFilePath, JSON.stringify(products, null, 2));
+    await fs.writeFile(productosFilePath, JSON.stringify(products, null, 2));
 
     return res.status(200).send({ status: 'success', message: 'Producto eliminado correctamente' });
   } catch (error) {
@@ -247,9 +259,11 @@ module.exports = router;
 
 /////////////////////////////////////////////////////
 /* La ruta raíz PUT /  */
-// Modificar un producto
-/* http://localhost:8080/api/products/ */
+// Modificar un producto proporcionando el id
+/* http://localhost:8080/api/products/:pid */
 // Templates de productos para el Body de Postman
 /* {
   "title": "Titulo modificado"
 }  */
+
+// Retorna : success: Faltan campos obligatorios
