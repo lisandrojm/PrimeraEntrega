@@ -22,18 +22,14 @@
     "thumbnails": "Sin imagen"
   },
   {
-    "id": "7394",
+    "id": "f57a",
     "title": "Producto Postman",
     "description": "Este es un producto de Postman",
-    "code": "a12",
+    "code": "151",
     "price": 100,
     "status": true,
     "stock": 10,
     "category": "Categoría Postman",
-    "thumbnails": [
-      "/ruta/de/image1.jpg",
-      "/ruta/de/image2.jpg",
-      "/ruta/de/image3.jpg"
-    ]
+    "thumbnails": "Sin imagen"
   }
 ]

@@ -214,7 +214,7 @@ module.exports = router;
 /////////////////////////////////////////////////////
 /* La ruta GET /:pid /  */
 // Obtener producto con el id proporcionado */
-/* http://localhost:8080/api/products/b4de */
+/* http://localhost:8080/api/products/d806 */
 // Retorna el producto con el id seleccionado
 
 /////////////////////////////////////////////////////
@@ -227,7 +227,7 @@ module.exports = router;
 /* {
   "title": "Producto Postman",
   "description": "Este es un producto de Postman",
-  "code": "a1",
+  "code": "f8",
   "price": 100,
   "stock": 10,
   "category": "Categoría Postman"
@@ -238,7 +238,7 @@ module.exports = router;
 /* {
   "title": "Producto Postman",
   "description": "Este es un producto de Postman",
-  "code": "a1",
+  "code": "f9",
   "price": 100,
   "stock": 10,
   "category": "Categoría Postman",
@@ -253,7 +253,7 @@ module.exports = router;
 /* {
   "title": "Producto Postman",
   "description": "Este es un producto de Postman",
-  "code": "a1",
+  "code": "f1",
   "stock": 10,
   "category": "Categoría Postman",
   "thumbnails": [
@@ -293,3 +293,9 @@ module.exports = router;
   ]
 } */
 // Retorna : error: "Ya existe un producto con el mismo código"
+
+/////////////////////////////////////////////////////
+/* La ruta DELETE /:pid /  */
+// Elimina producto con el id proporcionado */
+/* http://localhost:8080/api/products/:pid */
+// Elimina el producto con el id seleccionado
