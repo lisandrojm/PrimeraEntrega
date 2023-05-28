@@ -1,29 +1,33 @@
 const express = require('express');
-const fs = require('fs');
+const fs = require('fs').promises;
 const { v4: uuidv4 } = require('uuid');
 
 const router = express.Router();
 
-// Ruta del archivo JSON para respaldar los productos
 const productosFilePath = './productos.json';
 
 // Verificar y crear el archivo "productos.json" si no existe o está vacío
-if (!fs.existsSync(productosFilePath) || fs.readFileSync(productosFilePath, 'utf8').trim() === '') {
-  fs.writeFileSync(productosFilePath, '[]');
-}
+(async () => {
+  try {
+    await fs.access(productosFilePath);
+    const fileContent = await fs.readFile(productosFilePath, 'utf8');
+    if (fileContent.trim() === '') {
+      await fs.writeFile(productosFilePath, '[]');
+    }
+  } catch (error) {
+    console.error('Error al verificar y crear el archivo productos.json:', error);
+  }
+})();
 
 /////////////////////////////////////////////////////
-/* La ruta raíz GET /  */
-// Obtener todos los productos (Incluyendo la limitación ?limit)
-router.get('/', (req, res) => {
+/* La ruta raíz GET / */
+router.get('/', async (req, res) => {
   try {
-    const limit = req.query.limit; // Obtener el valor del parámetro 'limit' de la consulta (si existe)
+    const limit = req.query.limit;
 
-    // Leer el archivo JSON de productos
-    const productosData = fs.readFileSync(productosFilePath, 'utf8');
+    const productosData = await fs.readFile(productosFilePath, 'utf8');
     const products = JSON.parse(productosData);
 
-    // Obtener productos limitados según el parámetro 'limit' o todos los productos si no se especifica el parámetro
     const limitedProducts = limit ? products.slice(0, parseInt(limit)) : products;
 
     return res.status(200).json(limitedProducts);
@@ -33,17 +37,14 @@ router.get('/', (req, res) => {
 });
 
 /////////////////////////////////////////////////////
-/* La ruta GET /:pid /  */
-// Obtener producto con el id proporcionado
-router.get('/:pid', (req, res) => {
+/* La ruta GET /:pid */
+router.get('/:pid', async (req, res) => {
   try {
     const { pid } = req.params;
 
-    // Leer el archivo JSON de productos
-    const productosData = fs.readFileSync(productosFilePath, 'utf8');
+    const productosData = await fs.readFile(productosFilePath, 'utf8');
     const products = JSON.parse(productosData);
 
-    // Buscar el producto por su ID
     const product = products.find((p) => p.id === pid);
 
     if (!product) {
@@ -55,26 +56,22 @@ router.get('/:pid', (req, res) => {
     return res.status(500).send({ status: 'error', error: 'Error al obtener el producto' });
   }
 });
+
 /////////////////////////////////////////////////////
-/* La ruta raíz POST /  */
-// Agregar un nuevo producto
-router.post('/', (req, res) => {
+/* La ruta raíz POST / */
+router.post('/', async (req, res) => {
   try {
     const { title, description, code, price, stock, category, thumbnails } = req.body;
 
-    // Verificar campos obligatorios
     if (!title || !description || !code || !price || !stock || !category) {
       return res.status(500).send({ status: 'error', error: 'Faltan campos obligatorios' });
     }
 
-    // Leer el archivo JSON de productos
-    const productosData = fs.readFileSync(productosFilePath, 'utf8');
+    const productosData = await fs.readFile(productosFilePath, 'utf8');
     const products = JSON.parse(productosData);
 
-    // Generar un ID único para el nuevo producto
     const newProductId = uuidv4().substring(0, 4);
 
-    // Crear el nuevo producto con los campos proporcionados
     const newProduct = {
       id: newProductId,
       title,
@@ -84,14 +81,12 @@ router.post('/', (req, res) => {
       status: true,
       stock,
       category,
-      thumbnails: thumbnails || ['Sin imagenes'], // Asignar el string "Sin imagen" si no se proporciona thumbnails
+      thumbnails: thumbnails || ['Sin imágenes'],
     };
 
-    // Agregar el nuevo producto al array de productos
     products.push(newProduct);
 
-    // Guardar los productos actualizados en el archivo JSON
-    fs.writeFileSync(productosFilePath, JSON.stringify(products, null, 2));
+    await fs.writeFile(productosFilePath, JSON.stringify(products, null, 2));
     return res.status(201).send({ status: 'created', message: 'Producto agregado correctamente' });
   } catch (error) {
     return res.status(500).send({ status: 'error', error: 'Error al agregar el producto' });

@@ -13,7 +13,20 @@
     ]
   },
   {
-    "id": "0e7e",
+    "id": "ea81",
+    "title": "Producto Postman",
+    "description": "Este es un producto de Postman",
+    "code": "a1",
+    "price": 100,
+    "status": true,
+    "stock": 10,
+    "category": "Categoría Postman",
+    "thumbnails": [
+      "Sin imágenes"
+    ]
+  },
+  {
+    "id": "8e1b",
     "title": "Producto Postman",
     "description": "Este es un producto de Postman",
     "code": "a1",
@@ -25,19 +38,6 @@
       "/ruta/de/image1.jpg",
       "/ruta/de/image2.jpg",
       "/ruta/de/image3.jpg"
-    ]
-  },
-  {
-    "id": "9343",
-    "title": "Producto Postman",
-    "description": "Este es un producto de Postman",
-    "code": "a1",
-    "price": 100,
-    "status": true,
-    "stock": 10,
-    "category": "Categoría Postman",
-    "thumbnails": [
-      "Sin imagenes"
     ]
   }
 ]
