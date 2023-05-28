@@ -11,25 +11,36 @@
     "thumbnails": "Sin imagen"
   },
   {
-    "id": "fbd4",
+    "id": "020d",
     "title": "Producto Postman",
     "description": "Este es un producto de Postman",
-    "code": "a2",
-    "price": 200,
+    "code": "a1",
+    "price": 100,
     "status": true,
-    "stock": 20,
+    "stock": 10,
     "category": "Categoría Postman",
     "thumbnails": "Sin imagen"
   },
   {
-    "id": "0f26",
+    "id": "061a",
     "title": "Producto Postman",
     "description": "Este es un producto de Postman",
-    "code": "a2",
-    "price": 200,
+    "code": "a1",
+    "price": 100,
     "status": true,
     "stock": 10,
     "category": "Categoría Postman",
     "thumbnails": "Con imagen"
+  },
+  {
+    "id": "a008",
+    "title": "Producto Postman",
+    "description": "Este es un producto de Postman",
+    "code": "a1",
+    "price": 100,
+    "status": true,
+    "stock": 10,
+    "category": "Categoría Postman",
+    "thumbnails": "Sin imagen"
   }
 ]
