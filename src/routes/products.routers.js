@@ -212,3 +212,12 @@ module.exports = router;
   ]
 } */
 // Retorna : error: Faltan campos obligatorios
+
+/////////////////////////////////////////////////////
+/* La ruta raíz PUT /  */
+// Modificar un producto
+/* http://localhost:8080/api/products/ */
+// Templates de productos para el Body de Postman
+/* {
+  "title": "Titulo modificado"
+}  */
