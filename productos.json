@@ -26,5 +26,18 @@
       "/ruta/de/image2.jpg",
       "/ruta/de/image3.jpg"
     ]
+  },
+  {
+    "id": "9343",
+    "title": "Producto Postman",
+    "description": "Este es un producto de Postman",
+    "code": "a1",
+    "price": 100,
+    "status": true,
+    "stock": 10,
+    "category": "Categoría Postman",
+    "thumbnails": [
+      "Sin imagenes"
+    ]
   }
 ]

@@ -118,7 +118,7 @@ module.exports = router;
 /////////////////////////////////////////////////////
 /* La ruta GET /:pid /  */
 // Obtener producto con el id proporcionado */
-/* http://localhost:8080/api/products/64ae */
+/* http://localhost:8080/api/products/b4de */
 // Retorna el producto con el id seleccionado
 
 /////////////////////////////////////////////////////
