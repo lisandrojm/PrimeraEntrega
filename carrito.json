@@ -3,8 +3,12 @@
     "id": "6039",
     "products": [
       {
-        "product": "1234",
+        "product": "d0de",
         "quantity": 1
+      },
+      {
+        "product": "d806",
+        "quantity": 3
       }
     ]
   },

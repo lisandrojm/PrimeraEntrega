@@ -5,6 +5,7 @@ const router = express.Router();
 
 // Ruta del archivo JSON para respaldar los carritos
 const cartsFilePath = './carrito.json';
+const productsFilePath = './productos.json';
 
 // Función para generar IDs aleatorios de 4 dígitos
 function generateCartId(carts) {
@@ -103,6 +104,17 @@ router.post('/:cid/product/:pid', async (req, res) => {
 
     // Obtener el carrito actual
     const cart = carts[cartIndex];
+
+    // Leer el archivo JSON de productos
+    const productsData = await fs.readFile(productsFilePath, 'utf8');
+    const products = JSON.parse(productsData);
+
+    // Buscar el producto por su ID
+    const product = products.find((p) => p.id === pid);
+
+    if (!product) {
+      return res.status(404).send({ status: 'error', error: 'ID de Producto no encontrado en el archivo productos.json. Debe ingresar el ID de un producto existente.' });
+    }
 
     // Buscar el producto en el carrito
     const productIndex = cart.products.findIndex((p) => p.product === pid);
