@@ -132,4 +132,46 @@ router.post('/:cid/product/:pid', async (req, res) => {
   }
 });
 
+/////////////////////////////////////////////////////
+/* La ruta DELETE /:cid/product/:pid - Eliminar un producto del carrito */
+router.delete('/:cid/product/:pid', async (req, res) => {
+  try {
+    const { cid, pid } = req.params;
+
+    // Leer el archivo JSON de carritos
+    const cartsData = await fs.readFile(cartsFilePath, 'utf8');
+    const carts = JSON.parse(cartsData);
+
+    // Buscar el carrito por su ID
+    const cartIndex = carts.findIndex((c) => c.id === cid);
+
+    if (cartIndex === -1) {
+      return res.status(404).send({ status: 'error', error: 'Carrito no encontrado' });
+    }
+
+    // Obtener el carrito actual
+    const cart = carts[cartIndex];
+
+    // Buscar el producto en el carrito
+    const productIndex = cart.products.findIndex((p) => p.product === pid);
+
+    if (productIndex === -1) {
+      return res.status(404).send({ status: 'error', error: 'Producto no encontrado en el carrito' });
+    }
+
+    // Eliminar el producto del carrito
+    cart.products.splice(productIndex, 1);
+
+    // Actualizar el carrito en la lista de carritos
+    carts[cartIndex] = cart;
+
+    // Guardar los carritos actualizados en el archivo JSON
+    await fs.writeFile(cartsFilePath, JSON.stringify(carts, null, 2));
+
+    return res.status(200).send({ status: 'success', message: 'Producto eliminado del carrito correctamente' });
+  } catch (error) {
+    return res.status(500).send({ status: 'error', error: 'Error al eliminar el producto del carrito' });
+  }
+});
+
 module.exports = router;
