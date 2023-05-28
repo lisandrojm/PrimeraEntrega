@@ -1,31 +1,26 @@
 const express = require('express');
-const fs = require('fs').promises; // Utilizamos fs.promises para utilizar funciones asincrónicas
+const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 
 const router = express.Router();
+
 // Ruta del archivo JSON para respaldar los productos
 const productosFilePath = './productos.json';
+
 // Verificar y crear el archivo "productos.json" si no existe o está vacío
-(async () => {
-  try {
-    await fs.access(productosFilePath);
-  } catch (error) {
-    if (error.code === 'ENOENT') {
-      await fs.writeFile(productosFilePath, '[]');
-    } else {
-      console.error('Error al verificar y crear el archivo productos.json:', error);
-    }
-  }
-})();
+if (!fs.existsSync(productosFilePath) || fs.readFileSync(productosFilePath, 'utf8').trim() === '') {
+  fs.writeFileSync(productosFilePath, '[]');
+}
+
 /////////////////////////////////////////////////////
 /* La ruta raíz GET /  */
 // Obtener todos los productos (Incluyendo la limitación ?limit)
-router.get('/', async (req, res) => {
+router.get('/', (req, res) => {
   try {
     const limit = req.query.limit; // Obtener el valor del parámetro 'limit' de la consulta (si existe)
 
     // Leer el archivo JSON de productos
-    const productosData = await fs.readFile(productosFilePath, 'utf8');
+    const productosData = fs.readFileSync(productosFilePath, 'utf8');
     const products = JSON.parse(productosData);
 
     // Obtener productos limitados según el parámetro 'limit' o todos los productos si no se especifica el parámetro
@@ -40,12 +35,12 @@ router.get('/', async (req, res) => {
 /////////////////////////////////////////////////////
 /* La ruta GET /:pid /  */
 // Obtener producto con el id proporcionado
-router.get('/:pid', async (req, res) => {
+router.get('/:pid', (req, res) => {
   try {
     const { pid } = req.params;
 
     // Leer el archivo JSON de productos
-    const productosData = await fs.readFile(productosFilePath, 'utf8');
+    const productosData = fs.readFileSync(productosFilePath, 'utf8');
     const products = JSON.parse(productosData);
 
     // Buscar el producto por su ID
@@ -60,11 +55,10 @@ router.get('/:pid', async (req, res) => {
     return res.status(500).send({ status: 'error', error: 'Error al obtener el producto' });
   }
 });
-
 /////////////////////////////////////////////////////
 /* La ruta raíz POST /  */
 // Agregar un nuevo producto
-router.post('/', async (req, res) => {
+router.post('/', (req, res) => {
   try {
     const { title, description, code, price, stock, category, thumbnails } = req.body;
 
@@ -74,14 +68,13 @@ router.post('/', async (req, res) => {
     }
 
     // Leer el archivo JSON de productos
-    const productosData = await fs.readFile(productosFilePath, 'utf8');
+    const productosData = fs.readFileSync(productosFilePath, 'utf8');
     const products = JSON.parse(productosData);
 
     // Generar un ID único para el nuevo producto
     const newProductId = uuidv4().substring(0, 4);
 
     // Crear el nuevo producto con los campos proporcionados
-
     const newProduct = {
       id: newProductId,
       title,
@@ -98,7 +91,7 @@ router.post('/', async (req, res) => {
     products.push(newProduct);
 
     // Guardar los productos actualizados en el archivo JSON
-    await fs.writeFile(productosFilePath, JSON.stringify(products, null, 2));
+    fs.writeFileSync(productosFilePath, JSON.stringify(products, null, 2));
     return res.status(201).send({ status: 'created', message: 'Producto agregado correctamente' });
   } catch (error) {
     return res.status(500).send({ status: 'error', error: 'Error al agregar el producto' });
@@ -134,17 +127,6 @@ module.exports = router;
 /* http://localhost:8080/api/products/ */
 // Templates de productos para el Body de Postman
 
-// Con campo thumbnails
-/* {
-  "title": "Producto Postman",
-  "description": "Este es un producto de Postman",
-  "code": "a1",
-  "price": 100,
-  "stock": 10,
-  "category": "Categoría Postman",
-  "thumbnails": "Con imagen"
-} */
-
 // Sin campo thumbnails
 /* {
   "title": "Producto Postman",
@@ -152,7 +134,7 @@ module.exports = router;
   "code": "a1",
   "price": 100,
   "stock": 10,
-  "category": "Categoría Postman"
+  "category": "Categoría Postman",
 } */
 // Retorna : created : Producto agregado correctamente
 
