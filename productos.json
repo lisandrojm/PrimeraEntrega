@@ -9,5 +9,27 @@
     "stock": 10,
     "category": "Categoría Postman",
     "thumbnails": "Sin imagen"
+  },
+  {
+    "id": "fbd4",
+    "title": "Producto Postman",
+    "description": "Este es un producto de Postman",
+    "code": "a2",
+    "price": 200,
+    "status": true,
+    "stock": 20,
+    "category": "Categoría Postman",
+    "thumbnails": "Sin imagen"
+  },
+  {
+    "id": "0f26",
+    "title": "Producto Postman",
+    "description": "Este es un producto de Postman",
+    "code": "a2",
+    "price": 200,
+    "status": true,
+    "stock": 10,
+    "category": "Categoría Postman",
+    "thumbnails": "Con imagen"
   }
 ]
