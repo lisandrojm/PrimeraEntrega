@@ -1,7 +1,3 @@
-////////////////////////////////////////////////////////////////////////////////
-/* ENTREGA DEL PROYECTO FINAL - Primera entrega */
-////////////////////////////////////////////////////////////////////////////////
-
 /* ************************************************************************** */
 /* PRODUCTS (router) */
 /* ************************************************************************** */
@@ -31,9 +27,14 @@ const productosFilePath = './productos.json';
   }
 })();
 
-/////////////////////////////////////////////////////
-/* La ruta raíz GET /  */
-// Obtener todos los productos (Incluyendo la limitación ?limit)
+////////////////////////////////////////////////////////////////////////////////
+/* ************************************************************************** */
+/* GET /  */
+/* ************************************************************************** */
+// Obtiene todos los productos (Incluye la limitación ?limit para enviar la
+// cantidad de productos determinada)
+/* ************************************************************************** */
+
 router.get('/', async (req, res) => {
   try {
     const limit = req.query.limit; // Obtener el valor del parámetro 'limit' de la consulta (si existe)
@@ -51,9 +52,13 @@ router.get('/', async (req, res) => {
   }
 });
 
-/////////////////////////////////////////////////////
-/* La ruta GET /:pid /  */
-// Obtener producto con el id proporcionado
+////////////////////////////////////////////////////////////////////////////////
+/* ************************************************************************** */
+/* GET /:pid */
+/* ************************************************************************** */
+// Obtiene el producto con el id indicado
+/* ************************************************************************** */
+
 router.get('/:pid', async (req, res) => {
   try {
     const { pid } = req.params;
@@ -74,8 +79,14 @@ router.get('/:pid', async (req, res) => {
     return res.status(500).send({ status: 'error', error: 'Error al obtener el producto' });
   }
 });
-/* La ruta raíz POST / */
-// Agregar un nuevo producto
+
+////////////////////////////////////////////////////////////////////////////////
+/* ************************************************************************** */
+/* POST / */
+/* ************************************************************************** */
+// Agrega un nuevo producto (La propiedad "id" se autogenera)
+/* ************************************************************************** */
+
 router.post('/', async (req, res) => {
   try {
     const { id, title, description, code, price, stock, category, thumbnails } = req.body;
@@ -129,8 +140,13 @@ router.post('/', async (req, res) => {
   }
 });
 
-/* La ruta raíz PUT / */
-// Modificar un producto desde el id / no deja enviar el id del producto.
+////////////////////////////////////////////////////////////////////////////////
+/* ************************************************************************** */
+/* PUT /:pid  */
+/* ************************************************************************** */
+// Modifica un producto con el id indicado.
+/* ************************************************************************** */
+
 router.put('/:pid', async (req, res) => {
   try {
     const { pid } = req.params;
@@ -174,9 +190,12 @@ router.put('/:pid', async (req, res) => {
   }
 });
 
-/////////////////////////////////////////////////////
-/* La ruta raíz DELETE /  */
-// ELimina un producto desde el id especificado.
+/* ************************************************************************** */
+/* DELETE /:pid  */
+/* ************************************************************************** */
+// ELimina un producto con el id indicado.
+/* ************************************************************************** */
+
 router.delete('/:pid', async (req, res) => {
   try {
     const { pid } = req.params;
