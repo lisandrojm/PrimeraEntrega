@@ -44,7 +44,7 @@ router.get('/', async (req, res) => {
     const products = JSON.parse(productosData);
 
     // Obtener productos limitados según el parámetro 'limit' o todos los productos si no se especifica el parámetro
-    const limitedProducts = limit ? products.slice(0, parseInt(limit)) : products;
+    const limitedProducts = limit ? products.slice(0, parseInt(limit)) : { status: 'success', payload: products };
 
     return res.status(200).json(limitedProducts);
   } catch (error) {
@@ -74,7 +74,7 @@ router.get('/:pid', async (req, res) => {
       return res.status(404).send({ status: 'error', error: 'Producto no encontrado' });
     }
 
-    return res.status(200).json(product);
+    return res.status(200).send({ status: 'success', payload: product });
   } catch (error) {
     return res.status(500).send({ status: 'error', error: 'Error al obtener el producto' });
   }

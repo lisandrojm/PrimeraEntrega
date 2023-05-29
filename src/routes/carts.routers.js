@@ -75,7 +75,7 @@ router.post('/', async (req, res) => {
 /* ************************************************************************** */
 /* GET /:cid */
 /* ************************************************************************** */
-// Obtiene el producto con el id indicado
+// Obtiene el carrito con el id indicado
 /* ************************************************************************** */
 
 router.get('/:cid', async (req, res) => {
@@ -93,7 +93,7 @@ router.get('/:cid', async (req, res) => {
       return res.status(404).send({ status: 'error', error: 'Carrito no encontrado' });
     }
 
-    return res.status(200).json(cart.products);
+    return res.status(200).send({ status: 'success', payload: cart.products });
   } catch (error) {
     return res.status(500).send({ status: 'error', error: 'Error al obtener los productos del carrito' });
   }
