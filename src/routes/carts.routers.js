@@ -12,7 +12,7 @@ const router = express.Router();
 const cartsFilePath = './carrito.json';
 const productsFilePath = './productos.json';
 
-// Función para generar IDs únicos de 4 dígitos con el prefijo "C" para el nuevo carrito
+// Función para generar IDs únicos de 4 dígitos con el prefijo "cid" para el nuevo carrito
 function generateCartId(carts) {
   let id;
   const existingIds = carts.map((cart) => cart.id);

@@ -112,7 +112,7 @@ router.post('/', async (req, res) => {
       return res.status(400).send({ status: 'error', error: 'Ya existe un producto con el mismo código' });
     }
 
-    // Generar un ID único de 4 dígitos con el prefijo "P" para el nuevo producto
+    // Generar un ID único de 4 dígitos con el prefijo "pid" para el nuevo producto
     const newProductId = 'pid' + uuidv4().substring(0, 4);
 
     // Crear el nuevo producto con los campos proporcionados
