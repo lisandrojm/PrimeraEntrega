@@ -2,17 +2,21 @@
 /* CARTS (router) */
 /* ************************************************************************** */
 
+/* Importar módulos y dependencias necesarias */
 const express = require('express');
 const fs = require('fs').promises;
 const { v4: uuidv4 } = require('uuid');
 
+/* Crear un nuevo router de Express */
 const router = express.Router();
 
-// Ruta del archivo JSON para respaldar los carritos
+/* Ruta del archivo JSON para respaldar los carritos */
 const cartsFilePath = './carrito.json';
+
+/* Ruta del archivo JSON para respaldar los productos */
 const productsFilePath = './productos.json';
 
-// Función para generar IDs únicos de 4 dígitos con el prefijo "cid" para el nuevo carrito
+/* Función para generar un ID único para los carritos con el prefijo "cid" */
 function generateCartId(carts) {
   let id;
   const existingIds = carts.map((cart) => cart.id);
@@ -24,18 +28,16 @@ function generateCartId(carts) {
   return id;
 }
 
-// Verificar y crear el archivo "carrito.json" si no existe o está vacío
+/* Verificar y crear el archivo "carrito.json" si no existe o está vacío */
 (async () => {
   try {
-    await fs.access(cartsFilePath); // Check if the file exists
+    await fs.access(cartsFilePath);
 
     const cartsData = await fs.readFile(cartsFilePath, 'utf8');
     if (cartsData.trim() === '') {
-      // Empty file, initialize with empty array
       await fs.writeFile(cartsFilePath, '[]');
     }
   } catch (error) {
-    // File does not exist, create with empty array
     await fs.writeFile(cartsFilePath, '[]');
   }
 })();
@@ -49,24 +51,29 @@ function generateCartId(carts) {
 
 router.post('/', async (req, res) => {
   try {
-    // Leer el archivo JSON de carritos
+    /* Leer el archivo JSON de carritos */
     const cartsData = await fs.readFile(cartsFilePath, 'utf8');
     const carts = JSON.parse(cartsData);
 
-    const newCartId = generateCartId(carts); // Generar un nuevo ID para el carrito
+    /* Generar un nuevo ID único para el carrito */
+    const newCartId = generateCartId(carts);
 
+    /* Crear el nuevo carrito con el ID generado y un array vacío de productos */
     const newCart = {
       id: newCartId,
-      products: [], // Inicialmente, el carrito no contiene productos
+      products: [],
     };
 
-    // Agregar el nuevo carrito al archivo de carritos
+    /* Agregar el nuevo carrito al array de carritos */
     carts.push(newCart);
 
+    /* Guardar los carritos actualizados en el archivo JSON */
     await fs.writeFile(cartsFilePath, JSON.stringify(carts, null, 2));
 
+    /* Responder con el estado 201 (Creado) y enviar el nuevo carrito en la respuesta */
     return res.status(201).send({ status: 'created', message: 'Nuevo carrito creado', cart: newCart });
   } catch (error) {
+    /* Responder con el estado 500 (Error del servidor) en caso de error */
     return res.status(500).send({ status: 'error', error: 'Error al crear el carrito' });
   }
 });
@@ -90,11 +97,14 @@ router.get('/:cid', async (req, res) => {
     const cart = carts.find((c) => c.id === cid);
 
     if (!cart) {
+      // Si no se encuentra el carrito, responder con el estado 404 (No encontrado) y un mensaje de error
       return res.status(404).send({ status: 'error', error: 'Carrito no encontrado' });
     }
 
+    // Responder con el estado 200 (Éxito) y enviar los productos del carrito en la respuesta
     return res.status(200).send({ status: 'success', payload: cart.products });
   } catch (error) {
+    // En caso de error, responder con el estado 500 (Error del servidor) y un mensaje de error
     return res.status(500).send({ status: 'error', error: 'Error al obtener los productos del carrito' });
   }
 });
@@ -108,7 +118,9 @@ router.get('/:cid', async (req, res) => {
 
 router.post('/:cid/product/:pid', async (req, res) => {
   try {
+    // Desestructurar los parámetros de la solicitud
     const { cid, pid } = req.params;
+    // Desestructurar el cuerpo de la solicitud
     const { quantity } = req.body;
 
     // Leer el archivo JSON de carritos
@@ -119,6 +131,7 @@ router.post('/:cid/product/:pid', async (req, res) => {
     const cartIndex = carts.findIndex((c) => c.id === cid);
 
     if (cartIndex === -1) {
+      // Si no se encuentra el carrito, responder con el estado 404 (No encontrado) y un mensaje de error
       return res.status(404).send({ status: 'error', error: 'Carrito no encontrado' });
     }
 
@@ -133,6 +146,7 @@ router.post('/:cid/product/:pid', async (req, res) => {
     const product = products.find((p) => p.id === pid);
 
     if (!product) {
+      // Si no se encuentra el producto, responder con el estado 404 (No encontrado) y un mensaje de error
       return res.status(404).send({ status: 'error', error: 'ID de Producto no encontrado. Debe ingresar el ID de un producto existente en el archivo productos.json' });
     }
 
@@ -158,8 +172,10 @@ router.post('/:cid/product/:pid', async (req, res) => {
     // Guardar los carritos actualizados en el archivo JSON
     await fs.writeFile(cartsFilePath, JSON.stringify(carts, null, 2));
 
+    // Responder con el estado 200 (Éxito) y un mensaje de éxito
     return res.status(200).send({ status: 'success', message: 'Producto agregado al carrito correctamente' });
   } catch (error) {
+    // En caso de error, responder con el estado 500 (Error del servidor) y un mensaje de error
     return res.status(500).send({ status: 'error', error: 'Error al agregar el producto al carrito' });
   }
 });
@@ -246,13 +262,3 @@ router.delete('/:cid', async (req, res) => {
 });
 
 module.exports = router;
-
-/////////////////////////////////////////////////////
-/* Postman Testing */
-
-/////////////////////////////////////////////////////
-/* La ruta raíz POST /  */
-// Crear un nuevo carrito */
-/* http://localhost:8080/api/carts/ */
-// Crea un nuevo carrito con un id único en carrito.json
-// y la propiedad "products" con un array vacío como valor.

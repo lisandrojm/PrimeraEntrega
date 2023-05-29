@@ -39,20 +39,5 @@
       "/ruta/de/image5.jpg",
       "/ruta/de/image6.jpg"
     ]
-  },
-  {
-    "id": "pid6f98",
-    "title": "Producto Postman",
-    "description": "Este es un producto de Postman",
-    "code": "a4",
-    "price": 400,
-    "status": true,
-    "stock": 40,
-    "category": "Categoría Postman",
-    "thumbnails": [
-      "/ruta/de/image7.jpg",
-      "/ruta/de/image8.jpg",
-      "/ruta/de/image9.jpg"
-    ]
   }
 ]
