@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "30a7693c-74e5-4db1-8dab-db738eeb0446",
+		"name": "Carts API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "27650411",
+		"_collection_link": "https://www.postman.com/lisandrojm/workspace/lisandrojm/collection/27650411-30a7693c-74e5-4db1-8dab-db738eeb0446?action=share&creator=27650411&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Add New Cart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "http://localhost:8080/api/carts"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Cart by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/carts/:cid",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"carts",
+						":cid"
+					],
+					"variable": [
+						{
+							"key": "cid",
+							"value": "cide98d"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add New Product to Cart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/carts/:cid/product/:pid ",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"carts",
+						":cid",
+						"product",
+						":pid "
+					],
+					"variable": [
+						{
+							"key": "cid",
+							"value": "cid9f38"
+						},
+						{
+							"key": "pid ",
+							"value": "pid155a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/carts/:cid/product/:pid ",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"carts",
+						":cid",
+						"product",
+						":pid "
+					],
+					"variable": [
+						{
+							"key": "cid",
+							"value": "cid9f38"
+						},
+						{
+							"key": "pid ",
+							"value": "pid155a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Cart",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/carts/:cid",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"carts",
+						":cid"
+					],
+					"variable": [
+						{
+							"key": "cid",
+							"value": "cide97d"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
