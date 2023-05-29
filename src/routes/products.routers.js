@@ -1,3 +1,11 @@
+////////////////////////////////////////////////////////////////////////////////
+/* ENTREGA DEL PROYECTO FINAL - Primera entrega */
+////////////////////////////////////////////////////////////////////////////////
+
+/* ************************************************************************** */
+/* PRODUCTS (router) */
+/* ************************************************************************** */
+
 const express = require('express');
 const fs = require('fs').promises;
 const { v4: uuidv4 } = require('uuid');
@@ -66,12 +74,16 @@ router.get('/:pid', async (req, res) => {
     return res.status(500).send({ status: 'error', error: 'Error al obtener el producto' });
   }
 });
-/////////////////////////////////////////////////////
-/* La ruta raíz POST /  */
+/* La ruta raíz POST / */
 // Agregar un nuevo producto
 router.post('/', async (req, res) => {
   try {
-    const { title, description, code, price, stock, category, thumbnails } = req.body;
+    const { id, title, description, code, price, stock, category, thumbnails } = req.body;
+
+    // Verificar si se envía el campo "id"
+    if (id) {
+      return res.status(400).send({ status: 'error', error: 'No envíe el ID del producto. Se genera automáticamente para que sea único e irrepetible' });
+    }
 
     // Verificar campos obligatorios
     if (!title || !description || !code || !price || !stock || !category) {
@@ -89,8 +101,8 @@ router.post('/', async (req, res) => {
       return res.status(400).send({ status: 'error', error: 'Ya existe un producto con el mismo código' });
     }
 
-    // Generar un ID único para el nuevo producto
-    const newProductId = uuidv4().substring(0, 4);
+    // Generar un ID único de 4 dígitos con el prefijo "P" para el nuevo producto
+    const newProductId = 'pid' + uuidv4().substring(0, 4);
 
     // Crear el nuevo producto con los campos proporcionados
     const newProduct = {
@@ -116,13 +128,18 @@ router.post('/', async (req, res) => {
     return res.status(500).send({ status: 'error', error: 'Error al agregar el producto' });
   }
 });
-/////////////////////////////////////////////////////
-/* La ruta raíz PUT /  */
-// Modificar un producto desde el id especificado/ no deja enviar el id del producto.
+
+/* La ruta raíz PUT / */
+// Modificar un producto desde el id / no deja enviar el id del producto.
 router.put('/:pid', async (req, res) => {
   try {
     const { pid } = req.params;
     const updateFields = req.body;
+
+    // Verificar si se intenta modificar el ID del producto
+    if ('id' in updateFields) {
+      return res.status(400).send({ status: 'error', error: 'No se puede modificar el ID del producto' });
+    }
 
     // Leer el archivo JSON de productos
     const productosData = await fs.readFile(productosFilePath, 'utf8');
@@ -139,14 +156,7 @@ router.put('/:pid', async (req, res) => {
     // Obtener el producto actual
     const product = products[productIndex];
 
-    // Verificar si los campos enviados son válidos
-    const validFields = Object.keys(updateFields).every((field) => field in product);
-
-    if (!validFields) {
-      return res.status(400).send({ status: 'error', error: 'Los campos enviados no son válidos' });
-    }
-
-    // Actualizar el producto con los campos enviados
+    // Actualizar los campos proporcionados sin eliminar los campos no proporcionados
     const updatedProduct = {
       ...product,
       ...updateFields,
@@ -163,6 +173,7 @@ router.put('/:pid', async (req, res) => {
     return res.status(500).send({ status: 'error', error: 'Error al actualizar el producto' });
   }
 });
+
 /////////////////////////////////////////////////////
 /* La ruta raíz DELETE /  */
 // ELimina un producto desde el id especificado.
@@ -227,7 +238,7 @@ module.exports = router;
 /* {
   "title": "Producto Postman",
   "description": "Este es un producto de Postman",
-  "code": "f8",
+  "code": "a1",
   "price": 100,
   "stock": 10,
   "category": "Categoría Postman"
@@ -238,9 +249,9 @@ module.exports = router;
 /* {
   "title": "Producto Postman",
   "description": "Este es un producto de Postman",
-  "code": "f9",
-  "price": 100,
-  "stock": 10,
+  "code": "a2",
+  "price": 200,
+  "stock": 20,
   "category": "Categoría Postman",
   "thumbnails": [
     "/ruta/de/image1.jpg",
@@ -253,13 +264,13 @@ module.exports = router;
 /* {
   "title": "Producto Postman",
   "description": "Este es un producto de Postman",
-  "code": "f1",
-  "stock": 10,
+  "code": "a3",
+  "stock": 30,
   "category": "Categoría Postman",
   "thumbnails": [
-    "/ruta/de/image1.jpg",
-    "/ruta/de/image2.jpg",
-    "/ruta/de/image3.jpg"
+    "/ruta/de/image4.jpg",
+    "/ruta/de/image5.jpg",
+    "/ruta/de/image6.jpg"
   ]
 } */
 // Retorna : error: "Faltan campos obligatorios"
@@ -273,7 +284,7 @@ module.exports = router;
   "title": "Titulo modificado"
 }  */
 
-// Retorna : success: "Faltan campos obligatorios"
+// Retorna : error : "Faltan campos obligatorios"
 
 /////////////////////////////////////////////////////
 /* La ruta raíz PUT /  */

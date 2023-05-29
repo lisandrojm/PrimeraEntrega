@@ -1,5 +1,14 @@
+////////////////////////////////////////////////////////////////////////////////
+/* ENTREGA DEL PROYECTO FINAL - Primera entrega */
+////////////////////////////////////////////////////////////////////////////////
+
+/* ************************************************************************** */
+/* CARTS (router) */
+/* ************************************************************************** */
+
 const express = require('express');
 const fs = require('fs').promises;
+const { v4: uuidv4 } = require('uuid');
 
 const router = express.Router();
 
@@ -7,13 +16,13 @@ const router = express.Router();
 const cartsFilePath = './carrito.json';
 const productsFilePath = './productos.json';
 
-// Función para generar IDs aleatorios de 4 dígitos
+// Función para generar IDs únicos de 4 dígitos con el prefijo "C" para el nuevo carrito
 function generateCartId(carts) {
   let id;
   const existingIds = carts.map((cart) => cart.id);
 
   do {
-    id = Math.floor(1000 + Math.random() * 9000).toString();
+    id = 'cid' + uuidv4().substring(0, 4);
   } while (existingIds.includes(id));
 
   return id;
@@ -36,7 +45,7 @@ function generateCartId(carts) {
 })();
 
 /////////////////////////////////////////////////////
-/* La ruta raíz POST / - Crear un nuevo carrito */
+/* La ruta raíz POST / - Crear un nuevo carrito con un ID único*/
 router.post('/', async (req, res) => {
   try {
     // Leer el archivo JSON de carritos
@@ -62,7 +71,7 @@ router.post('/', async (req, res) => {
 });
 
 /////////////////////////////////////////////////////
-/* La ruta GET /:cid - Listar los productos de un carrito */
+/* La ruta GET /:cid - Listar los productos de un carrito desde su id */
 router.get('/:cid', async (req, res) => {
   try {
     const { cid } = req.params;
@@ -113,7 +122,7 @@ router.post('/:cid/product/:pid', async (req, res) => {
     const product = products.find((p) => p.id === pid);
 
     if (!product) {
-      return res.status(404).send({ status: 'error', error: 'ID de Producto no encontrado en el archivo productos.json. Debe ingresar el ID de un producto existente.' });
+      return res.status(404).send({ status: 'error', error: 'ID de Producto no encontrado. Debe ingresar el ID de un producto existente en el archivo productos.json' });
     }
 
     // Buscar el producto en el carrito
@@ -186,4 +195,43 @@ router.delete('/:cid/product/:pid', async (req, res) => {
   }
 });
 
+/////////////////////////////////////////////////////
+/* La ruta DELETE /:cid - Eliminar un carrito */
+router.delete('/:cid', async (req, res) => {
+  try {
+    const { cid } = req.params;
+
+    // Leer el archivo JSON de carritos
+    const cartsData = await fs.readFile(cartsFilePath, 'utf8');
+    const carts = JSON.parse(cartsData);
+
+    // Buscar el carrito por su ID
+    const cartIndex = carts.findIndex((c) => c.id === cid);
+
+    if (cartIndex === -1) {
+      return res.status(404).send({ status: 'error', error: 'Carrito no encontrado' });
+    }
+
+    // Eliminar el carrito de la lista de carritos
+    carts.splice(cartIndex, 1);
+
+    // Guardar los carritos actualizados en el archivo JSON
+    await fs.writeFile(cartsFilePath, JSON.stringify(carts, null, 2));
+
+    return res.status(200).send({ status: 'success', message: 'Carrito eliminado correctamente' });
+  } catch (error) {
+    return res.status(500).send({ status: 'error', error: 'Error al eliminar el carrito' });
+  }
+});
+
 module.exports = router;
+
+/////////////////////////////////////////////////////
+/* Postman Testing */
+
+/////////////////////////////////////////////////////
+/* La ruta raíz POST /  */
+// Crear un nuevo carrito */
+/* http://localhost:8080/api/carts/ */
+// Crea un nuevo carrito con un id único en carrito.json
+// y la propiedad "products" con un array vacío como valor.
