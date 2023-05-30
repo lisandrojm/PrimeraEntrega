@@ -9,6 +9,10 @@
       {
         "product": "pid6f98",
         "quantity": 3
+      },
+      {
+        "product": "pid155a",
+        "quantity": 3
       }
     ]
   },
@@ -33,5 +37,9 @@
         "quantity": 1
       }
     ]
+  },
+  {
+    "id": "cida376",
+    "products": []
   }
 ]

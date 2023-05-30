@@ -73,7 +73,7 @@
 					"variable": [
 						{
 							"key": "cid",
-							"value": "cid9f38"
+							"value": "cide98d"
 						},
 						{
 							"key": "pid ",
@@ -122,6 +122,15 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://localhost:8080/api/carts/:cid",
 					"protocol": "http",
@@ -137,7 +146,7 @@
 					"variable": [
 						{
 							"key": "cid",
-							"value": "cide97d"
+							"value": "pid155a"
 						}
 					]
 				}

@@ -46,7 +46,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/products?limit=2",
+					"raw": "http://localhost:8080/api/products?limit=1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -59,12 +59,89 @@
 					"query": [
 						{
 							"key": "limit",
-							"value": "2"
+							"value": "1"
 						}
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Limit 2",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/products?limit=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Limit 1",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/products?limit=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
 		},
 		{
 			"name": "Get Product by ID",
@@ -98,12 +175,91 @@
 					"variable": [
 						{
 							"key": "pid",
-							"value": "pid1b3e"
+							"value": "pida5aa"
 						}
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "pid1b3e",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/products/:pid",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products",
+								":pid"
+							],
+							"variable": [
+								{
+									"key": "pid",
+									"value": "pid1b3e"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "pid8052",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/products/:pid",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products",
+								":pid"
+							],
+							"variable": [
+								{
+									"key": "pid",
+									"value": "pid8052"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
 		},
 		{
 			"name": "Add New Product",
@@ -121,7 +277,113 @@
 				},
 				"url": "http://localhost:8080/api/products"
 			},
-			"response": []
+			"response": [
+				{
+					"name": "New Product",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Producto Postman\",\n  \"description\": \"Este es un producto de Postman\",\n  \"code\": \"a7\",\n  \"price\": 700,\n  \"stock\": 70,\n  \"category\": \"Categoría Postman\",\n  \"thumbnails\": [\n    \"/ruta/de/image13.jpg\",\n    \"/ruta/de/image14.jpg\",\n    \"/ruta/de/image15.jpg\"\n  ]\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/products"
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "New Product without \"thumbnails\"",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Producto Postman\",\n  \"description\": \"Este es un producto de Postman\",\n  \"code\": \"a6\",\n  \"price\": 600,\n  \"stock\": 60,\n  \"category\": \"Categoría Postman\"\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/products"
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "New Product created (error : \"Ya existe...\")",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Producto Postman\",\n  \"description\": \"Este es un producto de Postman\",\n  \"code\": \"a4\",\n  \"price\": 400,\n  \"stock\": 40,\n  \"category\": \"Categoría Postman\",\n  \"thumbnails\": [\n    \"/ruta/de/image7.jpg\",\n    \"/ruta/de/image8.jpg\",\n    \"/ruta/de/image9.jpg\"\n  ]\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/products"
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "New Product (error: \"Faltan campos...\")",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Producto Postman\",\n  \"code\": \"a4\",\n  \"stock\": 40,\n  \"category\": \"Categoría Postman\",\n  \"thumbnails\": [\n    \"/ruta/de/image7.jpg\",\n    \"/ruta/de/image8.jpg\",\n    \"/ruta/de/image9.jpg\"\n  ]\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/products"
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "New Product id (error: \"No envíe el ID del producto...\")",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"Producto Postman\",\n  \"title\": \"Producto Postman\",\n  \"description\": \"Este es un producto de Postman\",\n  \"code\": \"a5\",\n  \"price\": 500,\n  \"stock\": 50,\n  \"category\": \"Categoría Postman\",\n  \"thumbnails\": [\n    \"/ruta/de/image10.jpg\",\n    \"/ruta/de/image11.jpg\",\n    \"/ruta/de/image12.jpg\"\n  ]\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/products"
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
 		},
 		{
 			"name": "Update Product",
@@ -157,7 +419,47 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Update Product pid1b3e",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n    \"title\": \"Titulo modificado\",\n    \"description\": \"Descripción modificada\",\n    \"price\": 500\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/products/:pid",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products",
+								":pid"
+							],
+							"variable": [
+								{
+									"key": "pid",
+									"value": "pida5aa"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
 		},
 		{
 			"name": "Delete Product",
@@ -184,7 +486,38 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Delete Product",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/products/:pid",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products",
+								":pid"
+							],
+							"variable": [
+								{
+									"key": "pid",
+									"value": "pid155a"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
 		}
 	]
 }
