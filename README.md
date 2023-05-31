@@ -50,6 +50,7 @@ Esto iniciará el servidor en el puerto 8080.
 La aplicación expone las siguientes rutas:
 
 - `GET /api/products`: Obtiene la lista de productos.
+- `GET /api/products?limit=`: Obtiene la lista de productos con un límite determinado.
 - `GET /api/products/:pid`: Obtiene un producto específico por su ID.
 - `POST /api/products`: Agrega un nuevo producto.
 - `PUT /api/products/:pid`: Actualiza un producto existente.
