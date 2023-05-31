@@ -9,7 +9,7 @@ const { v4: uuidv4 } = require('uuid');
 const router = express.Router();
 
 // Ruta del archivo JSON para respaldar los productos
-const productosFilePath = './productos.json';
+const productosFilePath = './data/productos.json';
 
 // Verificar y crear el archivo "productos.json" si no existe o está vacío
 (async () => {

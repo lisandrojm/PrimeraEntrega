@@ -11,10 +11,10 @@ const { v4: uuidv4 } = require('uuid');
 const router = express.Router();
 
 /* Ruta del archivo JSON para respaldar los carritos */
-const cartsFilePath = './carrito.json';
+const cartsFilePath = './data/carrito.json';
 
 /* Ruta del archivo JSON para respaldar los productos */
-const productsFilePath = './productos.json';
+const productsFilePath = './data/productos.json';
 
 /* Función para generar un ID único para los carritos con el prefijo "cid" */
 function generateCartId(carts) {
