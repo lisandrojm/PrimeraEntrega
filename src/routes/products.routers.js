@@ -14,15 +14,16 @@ const productosFilePath = './productos.json';
 // Verificar y crear el archivo "productos.json" si no existe o está vacío
 (async () => {
   try {
-    await fs.access(productosFilePath); // Check if the file exists
+    // Verificar si el archivo "productos.json" existe
+    await fs.access(productosFilePath);
 
     const productosData = await fs.readFile(productosFilePath, 'utf8');
     if (productosData.trim() === '') {
-      // Empty file, initialize with empty array
+      // Si el archivo está vacío,inicializar un array vacío
       await fs.writeFile(productosFilePath, '[]');
     }
   } catch (error) {
-    // File does not exist, create with empty array
+    // Si el archivo no existe crearlo con un array vacío
     await fs.writeFile(productosFilePath, '[]');
   }
 })();
@@ -37,7 +38,8 @@ const productosFilePath = './productos.json';
 
 router.get('/', async (req, res) => {
   try {
-    const limit = req.query.limit; // Obtener el valor del parámetro 'limit' de la consulta (si existe)
+    // Obtener el valor del parámetro 'limit' de la consulta (si existe)
+    const limit = req.query.limit;
 
     // Leer el archivo JSON de productos
     const productosData = await fs.readFile(productosFilePath, 'utf8');
@@ -48,7 +50,7 @@ router.get('/', async (req, res) => {
 
     return res.status(200).json(limitedProducts);
   } catch (error) {
-    return res.status(500).send({ status: 'error', error: 'Error al obtener los productos' });
+    return res.status(500).json({ status: 'error', error: 'Error al obtener los productos' });
   }
 });
 
@@ -71,12 +73,12 @@ router.get('/:pid', async (req, res) => {
     const product = products.find((p) => p.id === pid);
 
     if (!product) {
-      return res.status(404).send({ status: 'error', error: 'Producto no encontrado' });
+      return res.status(404).json({ status: 'error', error: 'Producto no encontrado' });
     }
 
-    return res.status(200).send({ status: 'success', payload: product });
+    return res.status(200).json({ status: 'success', payload: product });
   } catch (error) {
-    return res.status(500).send({ status: 'error', error: 'Error al obtener el producto' });
+    return res.status(500).json({ status: 'error', error: 'Error al obtener el producto' });
   }
 });
 
@@ -93,12 +95,12 @@ router.post('/', async (req, res) => {
 
     // Verificar si se envía el campo "id"
     if (id) {
-      return res.status(400).send({ status: 'error', error: 'No envíe el ID del producto. Se genera automáticamente para que sea único e irrepetible' });
+      return res.status(400).json({ status: 'error', error: 'No envíe el ID del producto. Se genera automáticamente para que sea único e irrepetible' });
     }
 
     // Verificar campos obligatorios
     if (!title || !description || !code || !price || !stock || !category) {
-      return res.status(500).send({ status: 'error', error: 'Faltan campos obligatorios' });
+      return res.status(500).json({ status: 'error', error: 'Faltan campos obligatorios' });
     }
 
     // Leer el archivo JSON de productos
@@ -109,7 +111,7 @@ router.post('/', async (req, res) => {
     const existingProduct = products.find((p) => p.code === code);
 
     if (existingProduct) {
-      return res.status(400).send({ status: 'error', error: 'Ya existe un producto con el mismo código' });
+      return res.status(400).json({ status: 'error', error: 'Ya existe un producto con el mismo código' });
     }
 
     // Generar un ID único de 4 dígitos con el prefijo "pid" para el nuevo producto
@@ -125,7 +127,8 @@ router.post('/', async (req, res) => {
       status: true,
       stock,
       category,
-      thumbnails: thumbnails || 'Sin imagen', // Asignar el string "Sin imagen" si no se proporciona thumbnails
+      // Asignar el string "Sin imagen" si no se proporciona thumbnails
+      thumbnails: thumbnails || 'Sin imagen',
     };
 
     // Agregar el nuevo producto al array de productos
@@ -134,9 +137,9 @@ router.post('/', async (req, res) => {
     // Guardar los productos actualizados en el archivo JSON
     await fs.writeFile(productosFilePath, JSON.stringify(products, null, 2));
 
-    return res.status(201).send({ status: 'created', message: 'Producto agregado correctamente' });
+    return res.status(201).json({ status: 'created', message: 'Producto agregado correctamente' });
   } catch (error) {
-    return res.status(500).send({ status: 'error', error: 'Error al agregar el producto' });
+    return res.status(500).json({ status: 'error', error: 'Error al agregar el producto' });
   }
 });
 
@@ -154,7 +157,7 @@ router.put('/:pid', async (req, res) => {
 
     // Verificar si se intenta modificar el ID del producto
     if ('id' in updateFields) {
-      return res.status(400).send({ status: 'error', error: 'No se puede modificar el ID del producto' });
+      return res.status(400).json({ status: 'error', error: 'No se puede modificar el ID del producto' });
     }
 
     // Leer el archivo JSON de productos
@@ -166,7 +169,7 @@ router.put('/:pid', async (req, res) => {
 
     // Verificar si el producto no existe
     if (productIndex === -1) {
-      return res.status(404).send({ status: 'error', error: 'Producto no encontrado' });
+      return res.status(404).json({ status: 'error', error: 'Producto no encontrado' });
     }
 
     // Obtener el producto actual
@@ -184,9 +187,9 @@ router.put('/:pid', async (req, res) => {
     // Guardar los productos actualizados en el archivo JSON
     await fs.writeFile(productosFilePath, JSON.stringify(products, null, 2));
 
-    return res.status(200).send({ status: 'success', message: 'Producto actualizado correctamente' });
+    return res.status(200).json({ status: 'success', message: 'Producto actualizado correctamente' });
   } catch (error) {
-    return res.status(500).send({ status: 'error', error: 'Error al actualizar el producto' });
+    return res.status(500).json({ status: 'error', error: 'Error al actualizar el producto' });
   }
 });
 
@@ -209,7 +212,7 @@ router.delete('/:pid', async (req, res) => {
 
     // Verificar si el producto no existe
     if (productIndex === -1) {
-      return res.status(404).send({ status: 'error', error: 'Producto no encontrado' });
+      return res.status(404).json({ status: 'error', error: 'Producto no encontrado' });
     }
 
     // Eliminar el producto de la lista de productos
@@ -218,9 +221,9 @@ router.delete('/:pid', async (req, res) => {
     // Guardar los productos actualizados en el archivo JSON
     await fs.writeFile(productosFilePath, JSON.stringify(products, null, 2));
 
-    return res.status(200).send({ status: 'success', message: 'Producto eliminado correctamente' });
+    return res.status(200).json({ status: 'success', message: 'Producto eliminado correctamente' });
   } catch (error) {
-    return res.status(500).send({ status: 'error', error: 'Error al eliminar el producto' });
+    return res.status(500).json({ status: 'error', error: 'Error al eliminar el producto' });
   }
 });
 

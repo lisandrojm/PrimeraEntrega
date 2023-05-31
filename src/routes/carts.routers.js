@@ -71,10 +71,10 @@ router.post('/', async (req, res) => {
     await fs.writeFile(cartsFilePath, JSON.stringify(carts, null, 2));
 
     /* Responder con el estado 201 (Creado) y enviar el nuevo carrito en la respuesta */
-    return res.status(201).send({ status: 'created', message: 'Nuevo carrito creado', cart: newCart });
+    return res.status(201).json({ status: 'created', message: 'Nuevo carrito creado', cart: newCart });
   } catch (error) {
     /* Responder con el estado 500 (Error del servidor) en caso de error */
-    return res.status(500).send({ status: 'error', error: 'Error al crear el carrito' });
+    return res.status(500).json({ status: 'error', error: 'Error al crear el carrito' });
   }
 });
 
@@ -98,14 +98,14 @@ router.get('/:cid', async (req, res) => {
 
     if (!cart) {
       // Si no se encuentra el carrito, responder con el estado 404 (No encontrado) y un mensaje de error
-      return res.status(404).send({ status: 'error', error: 'Carrito no encontrado' });
+      return res.status(404).json({ status: 'error', error: 'Carrito no encontrado' });
     }
 
     // Responder con el estado 200 (Éxito) y enviar los productos del carrito en la respuesta
-    return res.status(200).send({ status: 'success', payload: cart.products });
+    return res.status(200).json({ status: 'success', payload: cart.products });
   } catch (error) {
     // En caso de error, responder con el estado 500 (Error del servidor) y un mensaje de error
-    return res.status(500).send({ status: 'error', error: 'Error al obtener los productos del carrito' });
+    return res.status(500).json({ status: 'error', error: 'Error al obtener los productos del carrito' });
   }
 });
 
@@ -132,7 +132,7 @@ router.post('/:cid/product/:pid', async (req, res) => {
 
     if (cartIndex === -1) {
       // Si no se encuentra el carrito, responder con el estado 404 (No encontrado) y un mensaje de error
-      return res.status(404).send({ status: 'error', error: 'Carrito no encontrado' });
+      return res.status(404).json({ status: 'error', error: 'Carrito no encontrado' });
     }
 
     // Obtener el carrito actual
@@ -147,7 +147,7 @@ router.post('/:cid/product/:pid', async (req, res) => {
 
     if (!product) {
       // Si no se encuentra el producto, responder con el estado 404 (No encontrado) y un mensaje de error
-      return res.status(404).send({ status: 'error', error: 'ID de Producto no encontrado. Debe ingresar el ID de un producto existente en el archivo productos.json' });
+      return res.status(404).json({ status: 'error', error: 'ID de Producto no encontrado. Debe ingresar el ID de un producto existente en el archivo productos.json' });
     }
 
     // Buscar el producto en el carrito
@@ -173,10 +173,10 @@ router.post('/:cid/product/:pid', async (req, res) => {
     await fs.writeFile(cartsFilePath, JSON.stringify(carts, null, 2));
 
     // Responder con el estado 200 (Éxito) y un mensaje de éxito
-    return res.status(200).send({ status: 'success', message: 'Producto agregado al carrito correctamente' });
+    return res.status(200).json({ status: 'success', message: 'Producto agregado al carrito correctamente' });
   } catch (error) {
     // En caso de error, responder con el estado 500 (Error del servidor) y un mensaje de error
-    return res.status(500).send({ status: 'error', error: 'Error al agregar el producto al carrito' });
+    return res.status(500).json({ status: 'error', error: 'Error al agregar el producto al carrito' });
   }
 });
 
@@ -199,7 +199,7 @@ router.delete('/:cid/product/:pid', async (req, res) => {
     const cartIndex = carts.findIndex((c) => c.id === cid);
 
     if (cartIndex === -1) {
-      return res.status(404).send({ status: 'error', error: 'Carrito no encontrado' });
+      return res.status(404).json({ status: 'error', error: 'Carrito no encontrado' });
     }
 
     // Obtener el carrito actual
@@ -209,7 +209,7 @@ router.delete('/:cid/product/:pid', async (req, res) => {
     const productIndex = cart.products.findIndex((p) => p.product === pid);
 
     if (productIndex === -1) {
-      return res.status(404).send({ status: 'error', error: 'Producto no encontrado en el carrito' });
+      return res.status(404).json({ status: 'error', error: 'Producto no encontrado en el carrito' });
     }
 
     // Eliminar el producto del carrito
@@ -221,9 +221,9 @@ router.delete('/:cid/product/:pid', async (req, res) => {
     // Guardar los carritos actualizados en el archivo JSON
     await fs.writeFile(cartsFilePath, JSON.stringify(carts, null, 2));
 
-    return res.status(200).send({ status: 'success', message: 'Producto eliminado del carrito correctamente' });
+    return res.status(200).json({ status: 'success', message: 'Producto eliminado del carrito correctamente' });
   } catch (error) {
-    return res.status(500).send({ status: 'error', error: 'Error al eliminar el producto del carrito' });
+    return res.status(500).json({ status: 'error', error: 'Error al eliminar el producto del carrito' });
   }
 });
 
@@ -246,7 +246,7 @@ router.delete('/:cid', async (req, res) => {
     const cartIndex = carts.findIndex((c) => c.id === cid);
 
     if (cartIndex === -1) {
-      return res.status(404).send({ status: 'error', error: 'Carrito no encontrado' });
+      return res.status(404).json({ status: 'error', error: 'Carrito no encontrado' });
     }
 
     // Eliminar el carrito de la lista de carritos
@@ -255,9 +255,9 @@ router.delete('/:cid', async (req, res) => {
     // Guardar los carritos actualizados en el archivo JSON
     await fs.writeFile(cartsFilePath, JSON.stringify(carts, null, 2));
 
-    return res.status(200).send({ status: 'success', message: 'Carrito eliminado correctamente' });
+    return res.status(200).json({ status: 'success', message: 'Carrito eliminado correctamente' });
   } catch (error) {
-    return res.status(500).send({ status: 'error', error: 'Error al eliminar el carrito' });
+    return res.status(500).json({ status: 'error', error: 'Error al eliminar el carrito' });
   }
 });
 

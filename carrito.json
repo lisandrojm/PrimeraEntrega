@@ -24,22 +24,5 @@
         "quantity": 2
       }
     ]
-  },
-  {
-    "id": "cid9f38",
-    "products": [
-      {
-        "product": "pid0316",
-        "quantity": 1
-      },
-      {
-        "product": "pid155a",
-        "quantity": 1
-      }
-    ]
-  },
-  {
-    "id": "cida376",
-    "products": []
   }
 ]
