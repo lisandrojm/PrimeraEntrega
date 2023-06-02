@@ -19,11 +19,7 @@
     "status": true,
     "stock": 20,
     "category": "Categoría Postman",
-    "thumbnails": [
-      "/ruta/de/image1.jpg",
-      "/ruta/de/image2.jpg",
-      "/ruta/de/image3.jpg"
-    ]
+    "thumbnails": ["/ruta/de/image1.jpg", "/ruta/de/image2.jpg", "/ruta/de/image3.jpg"]
   },
   {
     "id": "pid155a",
@@ -34,10 +30,6 @@
     "status": true,
     "stock": 30,
     "category": "Categoría Postman",
-    "thumbnails": [
-      "/ruta/de/image4.jpg",
-      "/ruta/de/image5.jpg",
-      "/ruta/de/image6.jpg"
-    ]
+    "thumbnails": ["/ruta/de/image4.jpg", "/ruta/de/image5.jpg", "/ruta/de/image6.jpg"]
   }
 ]
