@@ -53,7 +53,8 @@ La aplicación expone las siguientes rutas:
 - `POST /api/carts/:cid/product/:pid`: Agrega un producto al carrito.
 - `DELETE /api/carts/:cid/product/:pid`: Elimina un producto del carrito.
 - `DELETE /api/carts/:cid`: Elimina un carrito.
-- 
+-
+
 ## Video Postman Test
 
 https://github.com/lisandrojm/primera_entrega/assets/35199683/11f1e158-98c2-4dbf-8fca-098d0075f0dd
@@ -117,9 +118,3 @@ El proyecto utiliza las siguientes devDependencies:
 ## Postman Collections
 
 - En la carpeta `postman_collections`, encontrarás los archivos necesarios para importar las colecciones en Postman y realizar pruebas en el proyecto. Las colecciones proporcionan ejemplos de solicitudes HTTP para interactuar con la API y probar su funcionalidad.
-
-## Conclusiones
-
-El código proporcionado ofrece una base sólida para la implementación de un sistema de gestión de productos y carritos de compra utilizando Node.js y Express. Los controladores proporcionan las funciones necesarias para realizar operaciones CRUD en los productos y carritos, mientras que las rutas y el archivo principal `index.js` configuran el servidor y conectan los controladores con las solicitudes HTTP.
-
-Es importante tener en cuenta que el código proporcionado es solo una estructura básica y puede requerir modificaciones y mejoras adicionales para adaptarse a los requisitos específicos de tu proyecto.
