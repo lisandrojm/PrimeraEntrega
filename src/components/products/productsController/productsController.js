@@ -113,7 +113,6 @@ class ProductRouter {
       return res.status(500).json({ status: 'error', error: 'Error al agregar el producto' });
     }
   };
-
   // Actualizar un producto
   updateProduct = async (req, res) => {
     try {
