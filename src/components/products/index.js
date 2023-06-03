@@ -1,6 +1,6 @@
 /* ************************************************************************** */
-/* /src/components/carts - Contiene el controlador de los carritos de compra 
-(productsController.js) */
+/* /src/components/products - Contiene el controlador de los productos 
+ (productsController.js). */
 /* ************************************************************************** */
 
 const { Router } = require('express');

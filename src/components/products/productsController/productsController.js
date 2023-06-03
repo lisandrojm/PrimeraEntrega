@@ -1,3 +1,8 @@
+/* ************************************************************************** */
+/* /src/components/products/productsController/productsController.js -
+ controlador de los productos. */
+/* ************************************************************************** */
+
 const express = require('express');
 const fs = require('fs').promises;
 const { v4: uuidv4 } = require('uuid');
