@@ -1,3 +1,7 @@
+/* ************************************************************************** */
+/* /src/index.js - Inicia el servidor y configura las rutas. */
+/* ************************************************************************** */
+
 const express = require('express');
 const path = require('path');
 const PORT = 8080;

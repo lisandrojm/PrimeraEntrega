@@ -1,3 +1,8 @@
+/* ************************************************************************** */
+/* /src/components/carts/cartsController/cartsController.js -  controlador de
+ los carritos de compra. */
+/* ************************************************************************** */
+
 const express = require('express');
 const fs = require('fs').promises;
 const { v4: uuidv4 } = require('uuid');
@@ -149,7 +154,7 @@ class CartsRouter {
       return res.status(500).json({ status: 'error', error: 'Error al agregar el producto al carrito' });
     }
   };
-  // Add the delete route for removing a product from a cart
+  // Elimina un producto del carrito
   deleteProductToCart = async (req, res) => {
     try {
       const { cid, pid } = req.params;

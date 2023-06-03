@@ -1,3 +1,8 @@
+/* ************************************************************************** */
+/* /src/components/carts - Contiene el controlador de los carritos de compra 
+(productsController.js) */
+/* ************************************************************************** */
+
 const { Router } = require('express');
 const productsController = require('./productsController/productsController');
 

@@ -1,3 +1,8 @@
+/* ************************************************************************** */
+/* /src/components/carts - Contiene el controlador de los carritos de compra 
+(cartsController.js) */
+/* ************************************************************************** */
+
 const { Router } = require('express');
 const carritoController = require('./cartsController/cartsController');
 module.exports = (app) => {
@@ -8,7 +13,4 @@ module.exports = (app) => {
   router.post('/:cid/product/:pid', carritoController.addProductToCart);
   router.delete('/:cid/product/:pid', carritoController.deleteProductToCart);
   router.delete('/:cid', carritoController.deleteCart);
-  /*   router.post('/', productsController.addProduct);
-  router.put('/:pid', productsController.updateProduct);
-  router.delete('/:pid', productsController.deleteProduct); */
 };
