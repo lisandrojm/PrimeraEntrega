@@ -39,20 +39,5 @@
       "/ruta/de/image5.jpg",
       "/ruta/de/image6.jpg"
     ]
-  },
-  {
-    "id": "pid2b0a",
-    "title": "Producto Postman",
-    "description": "Producto Actddualizado",
-    "code": "aewdd67",
-    "price": 900,
-    "status": true,
-    "stock": 60,
-    "category": "Categoría Postman",
-    "thumbnails": [
-      "/ruta/de/image10.jpg",
-      "/ruta/de/image11.jpg",
-      "/ruta/de/image12.jpg"
-    ]
   }
 ]
