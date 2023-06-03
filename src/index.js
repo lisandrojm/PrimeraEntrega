@@ -18,7 +18,7 @@ class Server {
       })
     );
     // Rutas públicas
-    const publicPath = path.join(__dirname, 'public');
+    const publicPath = path.join(__dirname, '../public');
     this.app.use(express.static(publicPath));
 
     // Ruta para el archivo index.html
