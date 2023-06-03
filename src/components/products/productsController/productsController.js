@@ -124,6 +124,13 @@ class ProductRouter {
         return res.status(400).json({ status: 'error', error: 'No se puede modificar el ID del producto' });
       }
 
+      const allowedFields = ['title', 'description', 'code', 'price', 'stock', 'category'];
+      const invalidFields = Object.keys(updateFields).filter((field) => !allowedFields.includes(field));
+
+      if (invalidFields.length > 0) {
+        return res.status(400).json({ status: 'error', error: `Los siguientes campos no se pueden modificar: ${invalidFields.join(', ')}` });
+      }
+
       const productosData = await fs.readFile(this.productosFilePath, 'utf8');
       const products = JSON.parse(productosData);
 
