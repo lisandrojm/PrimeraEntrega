@@ -54,7 +54,7 @@ La aplicación expone las siguientes rutas:
 - `DELETE /api/carts/:cid/product/:pid`: Elimina un producto del carrito.
 - `DELETE /api/carts/:cid`: Elimina un carrito.
 - 
-## Video Preview Test
+## Video Postman Test
 
 https://github.com/lisandrojm/primera_entrega/assets/35199683/11f1e158-98c2-4dbf-8fca-098d0075f0dd
 
