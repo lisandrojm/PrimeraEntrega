@@ -64,7 +64,7 @@ https://github.com/lisandrojm/primera_entrega/assets/35199683/11f1e158-98c2-4dbf
 1. Clona este repositorio en tu máquina local:
 
    ```shell
-   git clone https://github.com/lisandrojm/primera_entrega
+   git clone https://github.com/lisandrojm/primera_pre-entrega
    ```
 
 2. Navega al directorio del proyecto:
