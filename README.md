@@ -1,4 +1,4 @@
-# ENTREGA DEL PROYECTO FINAL - Primera entrega - Coderhouse/Backend
+# ENTREGA DEL PROYECTO FINAL - Primera pre entrega - Coderhouse/Backend
 
 Este repositorio contiene la primera entrega del proyecto final del curso de Backend de Coderhouse. El proyecto utiliza Node.js y Express.js para crear una API RESTful que permite administrar productos y carritos de compras.
 
