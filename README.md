@@ -70,7 +70,7 @@ https://github.com/lisandrojm/primera_entrega/assets/35199683/11f1e158-98c2-4dbf
 2. Navega al directorio del proyecto:
 
    ```shell
-   cd primera_entrega
+   cd primera_pre-entrega
 
    ```
 
