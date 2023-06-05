@@ -1,7 +1,7 @@
 {
   "name": "proyecto-final--primera-entrega",
   "version": "1.0.0",
-  "description": "Prmera entrega del proyecto final del curso de backend de Coderhouse",
+  "description": "Primera entrega del proyecto final del curso de backend de Coderhouse",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
