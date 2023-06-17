@@ -13,6 +13,10 @@
       {
         "product": "pid155a",
         "quantity": 3
+      },
+      {
+        "productId": "pidaa26",
+        "quantity": 1
       }
     ]
   },
@@ -22,6 +26,15 @@
       {
         "product": "pid0316",
         "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "cid1a6f",
+    "products": [
+      {
+        "productId": "pidaa26",
+        "quantity": 4
       }
     ]
   }

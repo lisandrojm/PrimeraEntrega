@@ -20,13 +20,6 @@ class ProductRouter {
 
     // Verificar y crear el archivo "productos.json" si no existe o está vacío
     this.initializeProductsFile();
-
-    // Definir las rutas
-    this.router.get('/', this.getAllProducts);
-    this.router.get('/:pid', this.getProductById);
-    this.router.post('/', this.addProduct);
-    this.router.put('/:pid', this.updateProduct);
-    this.router.delete('/:pid', this.deleteProduct);
   }
 
   // Verificar y crear el archivo "productos.json" si no existe o está vacío

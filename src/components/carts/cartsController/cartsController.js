@@ -24,13 +24,6 @@ class CartsRouter {
 
     /* Verificar y crear el archivo "carrito.json" si no existe o está vacío */
     this.initializeCarritoFile();
-
-    /* Definir las rutas */
-    this.router.post('/', this.addCart);
-    this.router.get('/:cid', this.getCartById);
-    this.router.post('/:cid/product/:pid', this.addProductToCart);
-    this.router.delete('/:cid/product/:pid', this.deleteProductToCart);
-    this.router.delete('/:cid', this.deleteCart);
   }
 
   /* Verificar y crear el archivo "carrito.json" si no existe o está vacío */
