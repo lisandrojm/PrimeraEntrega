@@ -15,9 +15,6 @@ const { v4: uuidv4 } = require('uuid');
 /* Definir la clase 'CartsRouter' */
 class CartsRouter {
   constructor() {
-    /* Crear una instancia del enrutador de Express */
-    this.router = express.Router();
-
     /* Definir la ruta de los archivos de almacenamiento carrito.json y productos.json */
     this.carritoFilePath = './data/carrito.json';
     this.productsFilePath = './data/productos.json';

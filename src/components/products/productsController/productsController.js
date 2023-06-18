@@ -13,8 +13,6 @@ const { v4: uuidv4 } = require('uuid');
 /* Definir la clase 'ProductsRouter' */
 class ProductRouter {
   constructor() {
-    /* Crear una instancia del enrutador de Express */
-    this.router = express.Router();
     /* Definir la ruta del archivo de almacenamiento productos.json */
     this.productosFilePath = './data/productos.json';
 
