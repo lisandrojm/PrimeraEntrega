@@ -3,9 +3,6 @@
  los carritos de compra. */
 /* ************************************************************************** */
 
-/* Importar el módulo 'express' para crear y configurar el enrutador */
-const express = require('express');
-
 /* Importar el módulo 'fs' para trabajar con el sistema de archivos */
 const fs = require('fs').promises;
 

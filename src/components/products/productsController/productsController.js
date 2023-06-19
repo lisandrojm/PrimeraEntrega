@@ -3,9 +3,6 @@
  controlador de los productos. */
 /* ************************************************************************** */
 
-/* Importar el módulo 'express' para crear y configurar el enrutador */
-const express = require('express');
-
 const fs = require('fs').promises;
 /* Importar el módulo 'uuid' para generar identificadores únicos */
 const { v4: uuidv4 } = require('uuid');

@@ -54,20 +54,5 @@
       "/ruta/de/image11.jpg",
       "/ruta/de/image12.jpg"
     ]
-  },
-  {
-    "id": "pidaa26",
-    "title": "Producto Postman",
-    "description": "Este es un producto de Postman",
-    "code": "aee",
-    "price": 500,
-    "status": true,
-    "stock": 50,
-    "category": "Categoría Postman",
-    "thumbnails": [
-      "/ruta/de/image10.jpg",
-      "/ruta/de/image11.jpg",
-      "/ruta/de/image12.jpg"
-    ]
   }
 ]
